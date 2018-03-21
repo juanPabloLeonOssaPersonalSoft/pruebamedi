@@ -1,0 +1,32 @@
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:1.2.2")
+        //agrega el plugin de serenity al build de gradle
+    }
+}
+
+apply plugin: "java"
+apply plugin: 'eclipse'
+apply plugin: 'net.serenity-bdd.aggregator' //permite verificar la compilacion de las tareas de serenity en gradle
+
+dependencies {
+    testCompile 'net.serenity-bdd:serenity-core:1.2.2'  // clases de core serenity BDD
+    testCompile 'net.serenity-bdd:serenity-junit:1.2.2' // Serenity BDD JUnit
+    testCompile('junit:junit:4.12')
+    testCompile('org.assertj:assertj-core:1.7.0')
+    testCompile('org.slf4j:slf4j-simple:1.7.7')
+    testCompile 'net.serenity-bdd:serenity-jbehave:1.21.0'
+	compile ('log4j:log4j:1.2.17')
+    
+}
+
+gradle.startParameter.continueOnFailure = true //Asegura que la compilación de gradle no se detenga cuando falle el primer test
